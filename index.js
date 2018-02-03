@@ -40,6 +40,10 @@ function getStatusCodeColor(x) {
 
 browser.webRequest.onCompleted.addListener(
     e => {
+        if (e.tabId === -1 || e.type !== 'main_frame') {
+            return;
+        }
+
         statusCodes[e.tabId] = e.statusCode;
         setStatusCode(e.tabId)
     },
