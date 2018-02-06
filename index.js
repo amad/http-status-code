@@ -45,6 +45,7 @@ browser.webRequest.onCompleted.addListener(
         }
 
         statusCodes[e.tabId] = e.statusCode;
+        browser.browserAction.setTitle({ tabId: e.tabId, title: e.statusLine });
         setStatusCode(e.tabId)
     },
     { urls: ["<all_urls>"] }
