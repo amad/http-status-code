@@ -65,3 +65,16 @@ browser.tabs.onActivated.addListener(e => {
 browser.tabs.onRemoved.addListener(tabId => {
   statusCodes[tabId] = null;
 });
+
+browser.browserAction.onClicked.addListener(tab => {
+  if (!statusCodes[tab.id]) {
+    return;
+  }
+
+  browser.tabs.create({
+    url:
+      'https://httpstatuses.com/' +
+      statusCodes[tab.id] +
+      '?utm_source=httpstatuscode_addon'
+  });
+});
